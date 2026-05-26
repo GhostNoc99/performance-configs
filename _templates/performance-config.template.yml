@@ -1,0 +1,36 @@
+# =============================================================
+# PLANTILLA DE CONFIGURACIÓN — PRUEBA DE PERFORMANCE
+# Copia este archivo, renómbralo y completa los valores
+# El framework derivará automáticamente los parámetros de k6
+# =============================================================
+
+service:
+  name:    nombre-del-servicio          # identificador único
+  url:     http://host:puerto/endpoint  # URL completa del servicio
+  method:  GET                          # GET / POST / PUT / DELETE
+  headers:
+    Content-Type: application/json
+    # Authorization: Bearer {{TOKEN}}   # descomentar si aplica
+  body: |                               # solo para POST/PUT, dejar vacío si GET
+    {
+      "campo": "valor"
+    }
+
+cuestionario:
+  # --- Sección 3 del estándar: Clasificación de servicio ---
+  tipo_servicio: MICROSERVICIO          # MICROSERVICIO / ORQUESTADOR
+
+  # --- Sección 4 del estándar: Complejidad ---
+  complejidad: BAJA                     # BAJA / MEDIA / ALTA
+
+  # --- Sección 5 del estándar: Tipo de operación ---
+  operacion: LECTURA                    # LECTURA / MIXTA / ORQUESTADA
+
+  # --- Sección 6 del estándar: Tipo de persistencia ---
+  bd: SQL_ONPREMISE                     # SQL_ONPREMISE / NOSQL_NUBE
+
+# =============================================================
+# NO MODIFICAR — parámetros derivados automáticamente por Jenkins
+# tps, duration, p95_threshold, error_rate, pre_alloc_vus,
+# ramp_up, datos_minimos, mix_rw
+# =============================================================
