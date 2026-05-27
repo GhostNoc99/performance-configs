@@ -1,0 +1,17 @@
+proyecto:
+  nombre:    mi-ecosistema
+  issue_key: ME-46
+
+service:
+  name:   products-service
+  url:    http://host.docker.internal:8000/products/
+  method: GET
+  headers:
+    Content-Type: application/json
+  body: ""
+
+cuestionario:
+  tipo_servicio: MICROSERVICIO
+  complejidad:   MEDIA
+  operacion:     MIXTA
+  bd:            SQL_ONPREMISE

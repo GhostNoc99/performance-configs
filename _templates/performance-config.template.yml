@@ -1,36 +1,57 @@
 # =============================================================
-# PLANTILLA DE CONFIGURACIÓN — PRUEBA DE PERFORMANCE
-# Copia este archivo, renómbralo y completa los valores
-# El framework derivará automáticamente los parámetros de k6
+# PLANTILLA — Framework de Performance Config-Driven v2.0
+#
+# INSTRUCCIONES:
+# 1. Crea la carpeta: {proyecto}/{ISSUE-KEY}/
+# 2. Copia este archivo dentro de esa carpeta
+# 3. Renómbralo como {nombre-servicio}.yml
+# 4. Completa los campos marcados con ← COMPLETAR
+# 5. Haz push → Jenkins ejecuta automáticamente
 # =============================================================
+
+proyecto:
+  nombre:    nombre-del-proyecto    # ← COMPLETAR (ej: mi-ecosistema)
+  issue_key: ISSUE-000              # ← COMPLETAR (ej: ME-123)
 
 service:
-  name:    nombre-del-servicio          # identificador único
-  url:     http://host:puerto/endpoint  # URL completa del servicio
-  method:  GET                          # GET / POST / PUT / DELETE
+  name:   nombre-del-servicio       # ← COMPLETAR (ej: products-service)
+  url:    http://host:puerto/path   # ← COMPLETAR
+  method: GET                       # ← GET / POST / PUT / DELETE
   headers:
     Content-Type: application/json
-    # Authorization: Bearer {{TOKEN}}   # descomentar si aplica
-  body: |                               # solo para POST/PUT, dejar vacío si GET
-    {
-      "campo": "valor"
-    }
+    # Authorization: Bearer {{TOKEN}}  # descomentar si aplica
+  body: ""                          # ← JSON string si es POST/PUT
 
 cuestionario:
-  # --- Sección 3 del estándar: Clasificación de servicio ---
-  tipo_servicio: MICROSERVICIO          # MICROSERVICIO / ORQUESTADOR
+  # Sección 3 del estándar — Tipo de servicio
+  tipo_servicio: MICROSERVICIO      # ← MICROSERVICIO / ORQUESTADOR
 
-  # --- Sección 4 del estándar: Complejidad ---
-  complejidad: BAJA                     # BAJA / MEDIA / ALTA
+  # Sección 4 del estándar — Complejidad
+  # BAJA:  CRUD simple, máx 1 dependencia
+  # MEDIA: validaciones, 1-2 dependencias
+  # ALTA:  orquestación, 3+ dependencias
+  complejidad: BAJA                 # ← BAJA / MEDIA / ALTA
 
-  # --- Sección 5 del estándar: Tipo de operación ---
-  operacion: LECTURA                    # LECTURA / MIXTA / ORQUESTADA
+  # Sección 5 del estándar — Tipo de operación
+  # LECTURA:    solo consulta
+  # MIXTA:      lectura + escritura
+  # ORQUESTADA: múltiples llamados secuenciales
+  operacion: LECTURA                # ← LECTURA / MIXTA / ORQUESTADA
 
-  # --- Sección 6 del estándar: Tipo de persistencia ---
-  bd: SQL_ONPREMISE                     # SQL_ONPREMISE / NOSQL_NUBE
+  # Sección 6 del estándar — Tipo de persistencia
+  bd: SQL_ONPREMISE                 # ← SQL_ONPREMISE / NOSQL_NUBE
 
 # =============================================================
-# NO MODIFICAR — parámetros derivados automáticamente por Jenkins
-# tps, duration, p95_threshold, error_rate, pre_alloc_vus,
-# ramp_up, datos_minimos, mix_rw
+# NO MODIFICAR — Jenkins deriva estos parámetros automáticamente
+# según la tabla del estándar v2.0:
+#
+#  tipo+comp+op+bd          → tps / duration / p95 / preAllocVUs
+#  MICRO+BAJA+LECTURA+SQL   → 8 TPS  / 10m / 2000ms / 24 VUs
+#  MICRO+BAJA+LECTURA+NOSQL → 10 TPS / 10m / 1500ms / 30 VUs
+#  MICRO+MEDIA+MIXTA+SQL    → 15 TPS / 15m / 2000ms / 45 VUs
+#  MICRO+MEDIA+MIXTA+NOSQL  → 20 TPS / 15m / 1500ms / 60 VUs
+#  MICRO+ALTA+MIXTA+SQL     → 25 TPS / 20m / 2000ms / 75 VUs
+#  MICRO+ALTA+MIXTA+NOSQL   → 30 TPS / 20m / 1500ms / 90 VUs
+#  ORQ+MEDIA+ORCH+SQL       → 10 TPS / 15m / 4000ms / 40 VUs
+#  ORQ+ALTA+ORCH+NOSQL      → 18 TPS / 20m / 4000ms / 72 VUs
 # =============================================================

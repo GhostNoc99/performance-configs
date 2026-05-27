@@ -1,0 +1,34 @@
+# =============================================================
+# CONFIGURACIÓN DE PERFORMANCE — Config-Driven Framework
+# Estándar: v2.0 | Tipo prueba: CARGA
+# =============================================================
+
+proyecto:
+  nombre:    mi-ecosistema
+  issue_key: ME-46          # Key de la issue Jira
+
+service:
+  name:   health-service
+  url:    http://host.docker.internal:8000/health
+  method: GET
+  headers:
+    Content-Type: application/json
+  body: ""
+
+cuestionario:
+  tipo_servicio: MICROSERVICIO   # MICROSERVICIO / ORQUESTADOR
+  complejidad:   BAJA            # BAJA / MEDIA / ALTA
+  operacion:     LECTURA         # LECTURA / MIXTA / ORQUESTADA
+  bd:            SQL_ONPREMISE   # SQL_ONPREMISE / NOSQL_NUBE
+
+# =============================================================
+# Parámetros derivados automáticamente — NO MODIFICAR
+#   tps:           8
+#   duration:      10m
+#   ramp_up:       60s
+#   p95_threshold: 2000ms
+#   error_rate:    1%
+#   pre_alloc_vus: 24
+#   datos_minimos: 500 registros únicos
+#   mix_rw:        100% Lectura
+# =============================================================
