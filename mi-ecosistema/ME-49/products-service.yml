@@ -1,6 +1,6 @@
 proyecto:
   nombre:    mi-ecosistema
-  issue_key: ME-46
+  issue_key: ME-49
 
 service:
   name:   products-service

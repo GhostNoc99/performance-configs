@@ -5,7 +5,7 @@
 
 proyecto:
   nombre:    mi-ecosistema
-  issue_key: ME-46          # Key de la issue Jira
+  issue_key: ME-49          # Key de la issue Jira
 
 service:
   name:   health-service
